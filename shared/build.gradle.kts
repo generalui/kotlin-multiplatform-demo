@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 val ktor_version: String by extra
 val coroutines_version: String by extra
 val serialization_version: String by extra
+val korim_version: String by extra
 
 plugins {
     kotlin("multiplatform")
@@ -35,6 +36,9 @@ kotlin {
         // HTTP
         implementation("io.ktor:ktor-client-core:$ktor_version")
         implementation("io.ktor:ktor-client-serialization:$ktor_version")
+        // Images
+        implementation("com.soywiz.korlibs.korim:korim:$korim_version")
+
     }
 
     sourceSets["androidMain"].dependencies {
@@ -46,6 +50,8 @@ kotlin {
         api("io.ktor:ktor-client-serialization-jvm:$ktor_version")
         api("io.ktor:ktor-client-core-jvm:$ktor_version")
         api("io.ktor:ktor-client-android:$ktor_version")
+        // Images
+        implementation("com.soywiz.korlibs.korim:korim:$korim_version")
     }
 
     sourceSets["iosMain"].dependencies {

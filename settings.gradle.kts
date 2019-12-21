@@ -13,5 +13,7 @@ pluginManagement {
     }
 }
 
+enableFeaturePreview("GRADLE_METADATA")
+
 include("app")
 include("shared")

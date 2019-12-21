@@ -17,7 +17,9 @@ public class NasaApiService(private val api: NasaApi) : CoroutineScope {
         val date = GMTDate()
         launch {
             val deferred = async {
-                api.getPictureOfDayMetadata(date)
+                val nasaPOD = api.getPictureOfDayMetadata(date)
+                nasaPOD.image = api.getImage(nasaPOD.url)
+                nasaPOD
             }
             try {
                 val nasaPOD = deferred.await()

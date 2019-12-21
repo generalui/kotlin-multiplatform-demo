@@ -17,8 +17,14 @@ buildscript {
     }
 }
 
+// https://dl.bintray.com/korlibs/korlibs/com/soywiz/korlibs/korim/korim/com/soywiz/korlibs/korim/korim/1.9.2/korim-1.9.2.module
+
+// https://dl.bintray.com/korlibs/korlibs/com/soywiz/korlibs/korim/korim/1.9.2/
+
 allprojects {
     repositories {
+        maven { url = uri("https://dl.bintray.com/korlibs/korlibs") }
+
         google()
         jcenter()
         
