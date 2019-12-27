@@ -20,15 +20,12 @@ class ViewController: UIViewController {
         label.text = CommonKt.createApplicationScreenMessage()
         view.addSubview(label)
 
-        let service = NasaApiService(api: NasaApi())
-        service.getPictureOfDay() { pod, error in
-            if let pod = pod {
-                print(pod)
-            }
-            if let error = error {
-                print(error)
-            }
-        }
+        let settingsManager = SettingsManager(context: ApplicationContext())
+        let storedUsername = settingsManager.getUsername()
+        print("STORED: \(String(describing: storedUsername))")
+
+        let username = "joey"
+        settingsManager.saveUsername(name: username)
 
     }
 

@@ -6,8 +6,18 @@ val coroutines_version: String by extra
 val serialization_version: String by extra
 
 plugins {
+    id("com.android.library")
     kotlin("multiplatform")
     id("kotlinx-serialization")
+}
+
+android {
+    compileSdkVersion(28)
+    buildToolsVersion = "29.0.2"
+    defaultConfig {
+        minSdkVersion(16)
+        targetSdkVersion(28)
+    }
 }
 
 kotlin {
@@ -26,7 +36,8 @@ kotlin {
         }
     }
 
-    jvm("android")
+    android()
+//    jvm("android")
 
     sourceSets["commonMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
@@ -35,6 +46,8 @@ kotlin {
         // HTTP
         implementation("io.ktor:ktor-client-core:$ktor_version")
         implementation("io.ktor:ktor-client-serialization:$ktor_version")
+        // SETTINGS
+        implementation("com.russhwolf:multiplatform-settings:0.5")
     }
 
     sourceSets["androidMain"].dependencies {
@@ -42,10 +55,14 @@ kotlin {
         api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
         api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
         api("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version")
+        // ANDROID
+        api("com.android.support:support-compat:28.0.0")
         // HTTP
         api("io.ktor:ktor-client-serialization-jvm:$ktor_version")
         api("io.ktor:ktor-client-core-jvm:$ktor_version")
         api("io.ktor:ktor-client-android:$ktor_version")
+        // SETTINGS
+        implementation("com.russhwolf:multiplatform-settings:0.5")
     }
 
     sourceSets["iosMain"].dependencies {
