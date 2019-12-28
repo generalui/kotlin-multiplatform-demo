@@ -1,0 +1,15 @@
+CREATE TABLE planet(
+       id    INTEGER PRIMARY KEY NOT NULL,
+       name  TEXT NOT NULL
+);
+
+CREATE INDEX idx_planet_name ON planet(name);
+
+INSERT INTO planet(id, name) VALUES('1', 'Mercury');
+INSERT INTO planet(id, name) VALUES('2', 'Venus');
+INSERT INTO planet(id, name) VALUES('3', 'Earth');
+INSERT INTO planet(id, name) VALUES('4', 'Mars');
+INSERT INTO planet(id, name) VALUES('5', 'Jupiter');
+INSERT INTO planet(id, name) VALUES('6', 'Saturn');
+INSERT INTO planet(id, name) VALUES('7', 'Uranus');
+INSERT INTO planet(id, name) VALUES('8', 'Neptune');

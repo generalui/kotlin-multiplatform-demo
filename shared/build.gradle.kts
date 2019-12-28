@@ -1,13 +1,24 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
-//val kotlin_version: String by extra
 val ktor_version: String by extra
 val coroutines_version: String by extra
 val serialization_version: String by extra
+val sqldelight_version: String by extra
 
 plugins {
+    id("com.android.library")
     kotlin("multiplatform")
     id("kotlinx-serialization")
+    id("com.squareup.sqldelight")
+}
+
+android {
+    compileSdkVersion(28)
+    buildToolsVersion = "29.0.2"
+    defaultConfig {
+        minSdkVersion(16)
+        targetSdkVersion(28)
+    }
 }
 
 kotlin {
@@ -26,36 +37,40 @@ kotlin {
         }
     }
 
-    jvm("android")
+    android()
 
     sourceSets["commonMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutines_version")
         implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version")
-        // HTTP
-        implementation("io.ktor:ktor-client-core:$ktor_version")
-        implementation("io.ktor:ktor-client-serialization:$ktor_version")
+        // SQLITE
+        implementation("com.squareup.sqldelight:runtime:$sqldelight_version")
     }
 
     sourceSets["androidMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib")
-        api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
-        api("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
-        api("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version")
-        // HTTP
-        api("io.ktor:ktor-client-serialization-jvm:$ktor_version")
-        api("io.ktor:ktor-client-core-jvm:$ktor_version")
-        api("io.ktor:ktor-client-android:$ktor_version")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version")
+        // ANDROID
+        api("com.android.support:support-compat:28.0.0")
+        // SQLITE
+        implementation("com.squareup.sqldelight:android-driver:$sqldelight_version")
     }
 
     sourceSets["iosMain"].dependencies {
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutines_version")
         implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version")
-        // HTTP
-        implementation("io.ktor:ktor-client-ios:$ktor_version")
-        implementation("io.ktor:ktor-client-serialization-native:$ktor_version")
+        // SQLITE
+        implementation("com.squareup.sqldelight:ios-driver:$sqldelight_version")
     }
 
+}
+
+sqldelight {
+  database("SpaceGenDB") {
+    packageName = "com.genui.spacegen.db"
+  }
 }
 
 val packForXcode by tasks.creating(Sync::class) {

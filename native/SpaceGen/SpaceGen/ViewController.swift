@@ -20,15 +20,6 @@ class ViewController: UIViewController {
         label.text = CommonKt.createApplicationScreenMessage()
         view.addSubview(label)
 
-        let service = NasaApiService(api: NasaApi())
-        service.getPictureOfDay() { pod, error in
-            if let pod = pod {
-                print(pod)
-            }
-            if let error = error {
-                print(error)
-            }
-        }
 
     }
 
