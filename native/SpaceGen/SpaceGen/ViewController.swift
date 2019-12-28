@@ -20,6 +20,11 @@ class ViewController: UIViewController {
         label.text = CommonKt.createApplicationScreenMessage()
         view.addSubview(label)
 
+        let repo = PlanetRepo(databaseName: "planets.db", context: ApplicationContext())
+        let planetNames = repo.getPlanetNames()
+        planetNames.forEach {
+            print("PLANETS: \($0)")
+        }
 
     }
 

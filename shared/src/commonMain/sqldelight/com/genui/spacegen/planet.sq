@@ -13,3 +13,7 @@ INSERT INTO planet(id, name) VALUES('5', 'Jupiter');
 INSERT INTO planet(id, name) VALUES('6', 'Saturn');
 INSERT INTO planet(id, name) VALUES('7', 'Uranus');
 INSERT INTO planet(id, name) VALUES('8', 'Neptune');
+
+selectNames:
+SELECT name
+FROM planet;
