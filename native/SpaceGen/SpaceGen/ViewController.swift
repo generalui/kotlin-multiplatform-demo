@@ -11,27 +11,29 @@ import shared
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var label: UILabel!
+
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 21))
-        label.center = CGPoint(x: 160, y: 285)
-        label.textAlignment = .center
-        label.font = label.font.withSize(25)
         label.text = CommonKt.createApplicationScreenMessage()
-        view.addSubview(label)
 
+        spinner.startAnimating()
         let service = NasaApiService(api: NasaApi())
-        service.getPictureOfDay() { pod, error in
+        service.getPictureOfDay() { [weak self] pod, error in
             if let pod = pod {
-                print(pod)
+                self?.label.text = pod.title
             }
             if let error = error {
-                print(error)
+                self?.label.numberOfLines = 0
+                self?.label.font = UIFont.preferredFont(forTextStyle: .body)
+                self?.label.text = "\(error)"
             }
+            self?.spinner.stopAnimating()
         }
 
     }
 
 
 }
-

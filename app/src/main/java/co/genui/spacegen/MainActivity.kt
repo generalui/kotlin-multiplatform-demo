@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import co.genui.spacegen.services.NasaApi
 import co.genui.spacegen.services.NasaApiService
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,10 +16,10 @@ class MainActivity : AppCompatActivity() {
         val service = NasaApiService(NasaApi())
         service.getPictureOfDay() { pod, throwable -> 
             pod?.let {
-                print(it)
+                main_text.text = it.title
             }
             throwable?.let {
-                print(it)
+                main_text.text = it.message ?: "Unknown error"
             }
         }
 

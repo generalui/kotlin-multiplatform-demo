@@ -13,6 +13,7 @@ class NasaPOD(
     @SerialName("service_version")
     val serviceVersion: String,
     val title: String,
+    val copyright: String? = null,
     val url: String
 )
     
