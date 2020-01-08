@@ -1,8 +1,8 @@
 package co.genui.spacegen.services
 
+import co.genui.spacegen.DateTime
 import co.genui.spacegen.dispatcher
 import co.genui.spacegen.model.NasaPOD
-import io.ktor.util.date.GMTDate
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -10,8 +10,7 @@ public class NasaApiService(private val api: NasaApi) : CoroutineScope {
 
     override val coroutineContext: CoroutineContext = dispatcher() + SupervisorJob()
 
-    fun getPictureOfDay(completion: (NasaPOD?, Throwable?) -> Unit) {
-        val date = GMTDate()
+    fun getPictureOfDay(date: DateTime? = null, completion: (NasaPOD?, Throwable?) -> Unit) {
         launch {
             val deferred = async {
                 api.getPictureOfDayMetadata(date)
