@@ -1,8 +1,8 @@
 package co.genui.spacegen.services
 
+import co.genui.spacegen.NativeImage
 import co.genui.spacegen.model.NasaPOD
-import com.soywiz.korim.bitmap.NativeImage
-import com.soywiz.korim.format.nativeImageFormatProvider
+import co.genui.spacegen.nativeImageFromBytes
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.request.HttpRequestBuilder
@@ -26,15 +26,9 @@ public class NasaApi {
 
     suspend fun getPictureOfDayMetadata(date: GMTDate? = null): NasaPOD = client.get<NasaPOD>(NasaApi.endpoint)
 
-    suspend fun getImage(url: String): NativeImage = coroutineScope {
+    suspend fun getImage(url: String): NativeImage? = coroutineScope {
         val bytes = client.get<ByteArray>(url)
-        nativeImageFormatProvider.decode(bytes)
+        nativeImageFromBytes(bytes)
     }
-
-
-    // suspend fun getPictureOfDay(date: Date) -> NasaPOD {
-
-
-    // }
 
 }

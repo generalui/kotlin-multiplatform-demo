@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         service.getPictureOfDay() { [weak self] pod, error in
             if let pod = pod,
                let image = pod.image {
-                self?.imageView.image = image.toBMP32()
+                self?.imageView.image = image
             }
             if let error = error {
                 print(error)

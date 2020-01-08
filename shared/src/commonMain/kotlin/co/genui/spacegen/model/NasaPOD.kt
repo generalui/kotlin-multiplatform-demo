@@ -1,6 +1,6 @@
 package co.genui.spacegen.model
 
-import com.soywiz.korim.bitmap.NativeImage
+import co.genui.spacegen.NativeImage
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.*
 
@@ -14,6 +14,7 @@ class NasaPOD(
     @SerialName("service_version")
     val serviceVersion: String,
     val title: String,
+    val copyright: String? = null,
     val url: String,
     @Transient
     var image: NativeImage? = null

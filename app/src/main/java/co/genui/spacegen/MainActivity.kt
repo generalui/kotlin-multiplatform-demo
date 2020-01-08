@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import co.genui.spacegen.services.NasaApi
 import co.genui.spacegen.services.NasaApiService
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +16,9 @@ class MainActivity : AppCompatActivity() {
         val service = NasaApiService(NasaApi())
         service.getPictureOfDay() { pod, throwable -> 
             pod?.let {
-                print(it)
+                it.image?.let {
+                    main_image.setImageBitmap(it)
+                }
             }
             throwable?.let {
                 print(it)
