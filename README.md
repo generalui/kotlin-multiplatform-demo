@@ -9,8 +9,5 @@ SpaceGen demos some basic capabilities of Kotlin multiplatform for Android/iOS/J
 5. **images**: Images within shared code (via 3rd party korim lib), but cannot be passed across multiplatform/native boundary.
 5. **dates**: Enable native "date" type to be passed into shared api
 
-## Help wanted
-The JavaScript demo shows how to output a *shared.js* library, however it does not show how to integrate a web app (that uses *shared.js*) into the AndroidStudio build environment. 
-
 ---------------------------------------------------------
 Note: SpaceGen was originally planned as a demo based on Nasa's Picture-of-the-Day api, whence the name.
