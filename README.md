@@ -6,7 +6,7 @@ SpaceGen demos some basic capabilities of Kotlin multiplatform for Android/iOS/J
 2. **http**: Shared network service using JetBrains ktor library.
 3. **settings**: Platform-specific local storage/settings (viz., SharedPrefs/UserDefaults) within shared code.
 4. **sqlite**: Shared sqlite using 3rd party SqlDelight library.
-5. **images**: Images within shared code (via 3rd party korim lib), but cannot be passed across multiplatform/native boundary.
+5. **images**: Enable native "image" type to be received back from shared api
 5. **dates**: Enable native "date" type to be passed into shared api
 
 ---------------------------------------------------------
